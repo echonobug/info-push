@@ -1,0 +1,14 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:mysql://rm-2zeqd93op69crr9f2ao.mysql.rds.aliyuncs.com:3306/ipush
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ipush
+    password: info-push
+  mail:
+    host: smtp.qq.com
+    nickname: 嘿
+    username: 466944168@qq.com
+    password: porgookpewzscbec
