@@ -35,4 +35,5 @@ build/
 
 
 /info-push-web-generator/
-/logs/
+*/logs/
+logs/

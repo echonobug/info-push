@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ipush.mapper.AccessLogMapper">
+
+	<resultMap id="BaseResultMap" type="ipush.entity.AccessLog">
+		<result column="user_name" property="userName" />
+		<result column="request_ip" property="requestIp" />
+		<result column="request_method" property="requestMethod" />
+		<result column="request_url" property="requestUrl" />
+		<result column="request_duration" property="requestDuration" />
+		<result column="response_status" property="responseStatus" />
+		<result column="create_time" property="createTime" />
+	</resultMap>
+	<insert id="insertSelective" parameterType="ipush.entity.AccessLog">
+		insert into access_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userName != null">
+				user_name,
+			</if>
+			<if test="requestIp != null">
+				request_ip,
+			</if>
+			<if test="requestMethod != null">
+				request_method,
+			</if>
+			<if test="requestUrl != null">
+				request_url,
+			</if>
+			<if test="requestDuration != null">
+				request_duration,
+			</if>
+			<if test="responseStatus != null">
+				response_status,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userName != null">
+				#{userName},
+			</if>
+			<if test="requestIp != null">
+				#{requestIp},
+			</if>
+			<if test="requestMethod != null">
+				#{requestMethod},
+			</if>
+			<if test="requestUrl != null">
+				#{requestUrl},
+			</if>
+			<if test="requestDuration != null">
+				#{requestDuration},
+			</if>
+			<if test="responseStatus != null">
+				#{responseStatus},
+			</if>
+			<if test="createTime != null">
+				#{createTime},
+			</if>
+		</trim>
+	</insert>
+</mapper>
