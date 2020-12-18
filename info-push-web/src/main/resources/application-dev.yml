@@ -8,10 +8,17 @@ spring:
     username: ipush
     password: ENC(WkINcAMIjjqTN8Wi+CWxQqJ4C2iyZpUY)
   mail:
-    host: smtp.qq.com
+    host: smtp.gmail.com
     nickname: 嘿
-    username: 466944168@qq.com
-    password: ENC(MXukmkRM55U3Rh5MjX4t4TNLKFcS4Ny4/L/LTyHCUYk=)
+    username: cloudinfopush@gmail.com
+    password: ENC(THP8jH4MhI+5AVJ5dZGFK1WqUEFBmOcanX+dvfivtbA=)
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 logging:
   level:
     root: info
+

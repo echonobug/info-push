@@ -26,11 +26,6 @@
             <groupId>fun.jwei</groupId>
             <artifactId>info-push-web</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>fun.jwei</groupId>
-            <artifactId>info-push-web</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
 

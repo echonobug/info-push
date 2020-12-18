@@ -39,7 +39,6 @@ public class MailService {
     private JavaMailSender mailSender;
     private Configuration configuration;
 
-
     @Autowired
     public void setMailSender(JavaMailSender mailSender) {
         this.mailSender = mailSender;
@@ -54,6 +53,7 @@ public class MailService {
     public void sendText(String subject, String text, String... to) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(nickname + "<" + from + ">");
+//        message.setFrom(from);
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);

@@ -32,7 +32,7 @@ public class MailServiceTest {
 
     @Test
     void sendHtml() throws MessagingException, IOException, TemplateException, InterruptedException {
-        Map<String, Object> model = new HashMap();
+        Map<String, Object> model = new HashMap<>();
         model.put("name", "张三");
         model.put("sno", "2017XXX");
         log.info("开始发送...");

@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 8081
 
 spring:
   datasource:
@@ -11,7 +11,18 @@ spring:
     host: smtp.qq.com
     nickname: 嘿
     username: 466944168@qq.com
-    password: ENC(MXukmkRM55U3Rh5MjX4t4TNLKFcS4Ny4/L/LTyHCUYk=)
-logging:
-  level:
-    root: info
+    password: ENC(RmH+spR1H65bNuFtCvvsjmTLmHPj72agsDn71A3MAOM=)
+
+ipush:
+  token:
+    secret: ENC(bvk3eCYI3r7v9XaXGHdKNG/ACEl8it34)
+    expiration: 1800000
+    header: ipushToken
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+
