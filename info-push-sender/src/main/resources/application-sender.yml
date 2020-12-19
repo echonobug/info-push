@@ -1,0 +1,8 @@
+spring:
+  mail:
+    host: smtp.qq.com
+    nickname: 嘿
+    username: 466944168@qq.com
+    password: ENC(RmH+spR1H65bNuFtCvvsjmTLmHPj72agsDn71A3MAOM=)
+
+

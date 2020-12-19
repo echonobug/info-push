@@ -7,18 +7,17 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ipush
     password: ENC(WkINcAMIjjqTN8Wi+CWxQqJ4C2iyZpUY)
-  mail:
-    host: smtp.gmail.com
-    nickname: 嘿
-    username: cloudinfopush@gmail.com
-    password: ENC(THP8jH4MhI+5AVJ5dZGFK1WqUEFBmOcanX+dvfivtbA=)
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-logging:
-  level:
-    root: info
+
+ipush:
+  token:
+    secret: ENC(bvk3eCYI3r7v9XaXGHdKNG/ACEl8it34)
+    expiration: 1800000
+    header: ipushToken
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+
 

@@ -1,9 +1,0 @@
-{
-  "properties": [
-    {
-      "name": "spring.mail.nickname",
-      "type": "java.lang.String",
-      "description": "昵称."
-    }
-  ]
-}
