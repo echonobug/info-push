@@ -1,7 +1,9 @@
 package fun.jwei.ipush.web.service;
 
-import fun.jwei.ipush.web.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import fun.jwei.ipush.web.dto.UserDTO;
+import fun.jwei.ipush.web.entity.User;
+import fun.jwei.ipush.web.exception.IPushException;
 import fun.jwei.ipush.web.vo.UserVO;
 
 /**
@@ -21,4 +23,13 @@ public interface UserService extends IService<User> {
      * @return token
      */
     String login(UserVO userVO);
+
+    /**
+     * 获取用户信息
+     *
+     * @param token 用户token
+     * @return 用户信息
+     * @throws IPushException 获取失败
+     */
+    UserDTO getInfo(String token) throws IPushException;
 }

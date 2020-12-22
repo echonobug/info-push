@@ -5,7 +5,7 @@
             <PatternLayout charset="UTF-8" pattern="%p %d{yyyy-MM-dd HH:mm:ss.SSS} %c %L %t %m%n" />
         </Console>
 
-        <RollingFile name="runtimeFile" fileName="../logs/ipush-server.log" filePattern="../logs/ipush-server-%d{yyyy-MM-dd}.log"
+        <RollingFile name="runtimeFile" fileName="./logs/ipush-server.log" filePattern="./logs/ipush-server-%d{yyyy-MM-dd}.log"
                      append="true">
             <PatternLayout pattern="%p %d{yyyy-MM-dd HH:mm:ss.SSS} %c %L %t %m%n"/>
             <Policies>
@@ -23,7 +23,7 @@
             <!-- 此行以上为自动清理日志的配置 -->
         </RollingFile>
 
-        <RollingFile name="accessLog" fileName="../logs/ipush-access.log" filePattern="../logs/ipush-access-%d{yyyy-MM-dd}.log"
+        <RollingFile name="accessLog" fileName="./logs/ipush-access.log" filePattern="./logs/ipush-access-%d{yyyy-MM-dd}.log"
                      append="true">
             <PatternLayout pattern="%p %d{yyyy-MM-dd HH:mm:ss.SSS} %c %L %t %m%n"/>
             <Policies>
@@ -45,7 +45,7 @@
     </Appenders>
 
     <Loggers>
-        <logger name="fun.jwei.ipush.web.config.log.access.AccessLogInterceptor" level="info" additivity="false">
+        <logger name="fun.jwei.ipush.web.config.interceptor.AccessLogInterceptor" level="info" additivity="false">
             <AppenderRef ref="accessLog" />
         </logger>
         <root level="info">

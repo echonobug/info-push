@@ -1,4 +1,4 @@
-package fun.jwei.ipush.web.config.security;
+package fun.jwei.ipush.web.config.filter;
 
 import fun.jwei.ipush.web.service.UserService;
 import fun.jwei.ipush.web.util.TokenUtil;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 校验刷新Token
+ * 校验Token
  *
  * @author jwei
  * @date 2020/12/17
@@ -43,8 +43,7 @@ public class TokenFilter extends OncePerRequestFilter {
             if (username != null && authentication == null) {
                 UserDetails userDetails = ((UserDetailsService) userService).loadUserByUsername(username);
                 if (tokenUtil.validateToken(token, userDetails)) {
-                    log.info("校验Token通过");
-                    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null,userDetails.getAuthorities());
+                    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 }
             }

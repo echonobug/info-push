@@ -1,4 +1,4 @@
-package fun.jwei.ipush.web.config.log.access;
+package fun.jwei.ipush.web.config.interceptor;
 
 import fun.jwei.ipush.web.entity.AccessLog;
 import fun.jwei.ipush.web.entity.User;
@@ -13,6 +13,14 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <p>
+ * 记录访问日志  拦截器
+ * </p>
+ *
+ * @author jwei
+ * @date 2020/12/18
+ */
 @Slf4j
 @Component
 public class AccessLogInterceptor implements HandlerInterceptor {

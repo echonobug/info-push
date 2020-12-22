@@ -5,8 +5,11 @@
 	<resultMap id="BaseResultMap" type="fun.jwei.ipush.web.entity.User">
 		<id column="id" property="id" />
 		<result column="name" property="name" />
+		<result column="email" property="email" />
+		<result column="avatar" property="avatar" />
 		<result column="password" property="password" />
 		<result column="enable" property="enable" />
+		<result column="locked" property="locked" />
 	</resultMap>
 	<insert id="insertSelective" parameterType="fun.jwei.ipush.web.entity.User">
 		insert into user
@@ -17,11 +20,20 @@
 			<if test="name != null">
 				name,
 			</if>
+			<if test="email != null">
+				email,
+			</if>
+			<if test="avatar != null">
+				avatar,
+			</if>
 			<if test="password != null">
 				password,
 			</if>
 			<if test="enable != null">
 				enable,
+			</if>
+			<if test="locked != null">
+				locked,
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -31,11 +43,20 @@
 			<if test="name != null">
 				#{name},
 			</if>
+			<if test="email != null">
+				#{email},
+			</if>
+			<if test="avatar != null">
+				#{avatar},
+			</if>
 			<if test="password != null">
 				#{password},
 			</if>
 			<if test="enable != null">
 				#{enable},
+			</if>
+			<if test="locked != null">
+				#{locked},
 			</if>
 		</trim>
 	</insert>

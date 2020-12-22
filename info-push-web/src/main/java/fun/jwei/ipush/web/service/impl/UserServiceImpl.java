@@ -1,7 +1,10 @@
 package fun.jwei.ipush.web.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import fun.jwei.ipush.web.dto.UserDTO;
 import fun.jwei.ipush.web.entity.User;
+import fun.jwei.ipush.web.exception.ErrorCodeEnum;
+import fun.jwei.ipush.web.exception.IPushException;
 import fun.jwei.ipush.web.mapper.UserMapper;
 import fun.jwei.ipush.web.service.UserService;
 import fun.jwei.ipush.web.util.TokenUtil;
@@ -13,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 /**
  * <p>
@@ -20,7 +24,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author jwei
- * @date  2020/12/16
+ * @date 2020/12/16
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService, UserDetailsService {
@@ -32,7 +36,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = query().eq("name", s).one();
+        User user = query().eq("name", s).or().eq("email", s).one();
         if (user == null) {
             throw new UsernameNotFoundException("用户不存在！");
         }
@@ -47,4 +51,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         return tokenUtil.generateToken(userDetails);
     }
+
+    @Override
+    public UserDTO getInfo(String token) throws IPushException {
+        if (!StringUtils.hasLength(token)) {
+            throw IPushException.build(ErrorCodeEnum.NOT_LOGIN);
+        }
+        String username = tokenUtil.getUsernameFromToken(token);
+        UserDetails userDetails = loadUserByUsername(username);
+        if (!tokenUtil.validateToken(token, userDetails)) {
+            throw IPushException.build(ErrorCodeEnum.INVALID_TOKEN);
+        }
+        User user = (User) userDetails;
+        UserDTO userDTO = new UserDTO();
+        userDTO.setName(user.getName());
+        userDTO.setAvatar(user.getAvatar());
+        return userDTO;
+    }
+
+
 }

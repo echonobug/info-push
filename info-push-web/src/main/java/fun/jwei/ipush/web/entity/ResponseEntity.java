@@ -1,5 +1,7 @@
 package fun.jwei.ipush.web.entity;
 
+import fun.jwei.ipush.web.exception.ErrorCodeEnum;
+import fun.jwei.ipush.web.exception.IPushException;
 import fun.jwei.ipush.web.exception.ResponseCodeEnum;
 import lombok.Data;
 
@@ -21,7 +23,7 @@ public class ResponseEntity {
      * @return 响应体
      */
     public static ResponseEntity success() {
-        return new ResponseEntity(ResponseCodeEnum.SUCCESS);
+        return success(null);
     }
 
     /**
@@ -31,7 +33,7 @@ public class ResponseEntity {
      * @return 响应体
      */
     public static ResponseEntity success(Object data) {
-        return new ResponseEntity(ResponseCodeEnum.SUCCESS, data);
+        return new ResponseEntity(200, "请求成功！", data);
     }
 
     /**
@@ -40,17 +42,29 @@ public class ResponseEntity {
      * @param error 错误枚举
      * @return 响应体
      */
-    public static ResponseEntity error(ResponseCodeEnum error) {
+    public static ResponseEntity error(ErrorCodeEnum error) {
         return new ResponseEntity(error);
     }
 
-    private ResponseEntity(ResponseCodeEnum codeEnum) {
+    /**
+     * 请求出错
+     *
+     * @param error 系统异常
+     * @return 响应体
+     */
+    public static ResponseEntity error(IPushException error) {
+        return error(error.getErrorCodeEnum());
+    }
+
+
+    private ResponseEntity(ErrorCodeEnum codeEnum) {
         this.code = codeEnum.getCode();
         this.msg = codeEnum.getMsg();
     }
 
-    private ResponseEntity(ResponseCodeEnum codeEnum, Object data) {
-        this(codeEnum);
+    private ResponseEntity(Integer code, String msg, Object data) {
+        this.code = code;
+        this.msg = msg;
         this.data = data;
     }
 }

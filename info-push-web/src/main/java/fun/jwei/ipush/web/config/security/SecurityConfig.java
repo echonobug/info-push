@@ -1,11 +1,14 @@
 package fun.jwei.ipush.web.config.security;
 
+import fun.jwei.ipush.web.config.filter.TokenFilter;
 import fun.jwei.ipush.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.ExceptionHandlingConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,13 +27,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserService userService;
     @Autowired
     private TokenFilter tokenFilter;
+    @Autowired
+    private CustomAccessDeniedHandler customAccessDeniedHandler;
+    @Autowired
+    private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .csrf().disable()
+                .cors().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().exceptionHandling()
+                .accessDeniedHandler(customAccessDeniedHandler)
+                .authenticationEntryPoint(customAuthenticationEntryPoint)
                 .and().authorizeRequests((authorize) -> authorize
                 .antMatchers("/user/login").permitAll()
                 .anyRequest().authenticated());
