@@ -12,6 +12,8 @@ ipush:
   token:
     secret: ENC(bvk3eCYI3r7v9XaXGHdKNG/ACEl8it34)
     expiration: 1800000
+    remember-me-expiration: 604800000
+    refresh_point: 0.5
     header: ipushToken
 
 mybatis-plus:

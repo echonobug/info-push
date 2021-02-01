@@ -45,7 +45,7 @@
     </Appenders>
 
     <Loggers>
-        <logger name="fun.jwei.ipush.web.config.interceptor.AccessLogInterceptor" level="info" additivity="false">
+        <logger name="xyz.ipush.web.config.interceptor.AccessLogInterceptor" level="info" additivity="false">
             <AppenderRef ref="accessLog" />
         </logger>
         <root level="info">

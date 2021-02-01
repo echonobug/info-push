@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="fun.jwei.ipush.web.mapper.AccessLogMapper">
+<mapper namespace="xyz.ipush.web.mapper.AccessLogMapper">
 
-	<resultMap id="BaseResultMap" type="fun.jwei.ipush.web.entity.AccessLog">
+	<resultMap id="BaseResultMap" type="xyz.ipush.web.entity.AccessLog">
 		<result column="user_name" property="userName" />
 		<result column="request_ip" property="requestIp" />
 		<result column="request_method" property="requestMethod" />
@@ -11,7 +11,7 @@
 		<result column="response_status" property="responseStatus" />
 		<result column="create_time" property="createTime" />
 	</resultMap>
-	<insert id="insertSelective" parameterType="fun.jwei.ipush.web.entity.AccessLog">
+	<insert id="insertSelective" parameterType="xyz.ipush.web.entity.AccessLog">
 		insert into access_log
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="userName != null">
