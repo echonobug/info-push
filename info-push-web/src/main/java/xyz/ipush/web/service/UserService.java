@@ -23,7 +23,7 @@ public interface UserService extends IService<User> {
      * @param userVO 用户信息
      * @return token
      */
-    String login(UserLoginVO userVO);
+    String login(UserLoginVO userVO) throws IPushException;
 
     /**
      * 获取用户信息
@@ -39,4 +39,18 @@ public interface UserService extends IService<User> {
      * @throws IPushException exception
      */
     void register(UserRegisterVO userVO) throws IPushException;
+
+    /**
+     * 账号激活
+     *
+     * @param content 账号信息
+     */
+    void active(String content) throws IPushException;
+
+    /**
+     * 检测用户名是否可用
+     *
+     * @param username 用户名
+     */
+    void validateUsername(String username) throws IPushException;
 }

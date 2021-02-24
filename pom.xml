@@ -21,12 +21,18 @@
         <module>info-push-finder</module>
         <module>info-push-scheduler</module>
         <module>info-push-common</module>
+        <module>info-push-message</module>
     </modules>
 
     <properties>
         <java.version>14</java.version>
         <maven.compiler.source>14</maven.compiler.source>
         <maven.compiler.target>14</maven.compiler.target>
+        <info-push-sender.version>0.0.1-SNAPSHOT</info-push-sender.version>
+        <info-push-scheduler.version>0.0.1-SNAPSHOT</info-push-scheduler.version>
+        <info-push-finder.version>0.0.1-SNAPSHOT</info-push-finder.version>
+        <info-push-message.version>0.0.1-SNAPSHOT</info-push-message.version>
+        <info-push-common.version>0.0.1-SNAPSHOT</info-push-common.version>
     </properties>
 
     <dependencies>
@@ -66,9 +72,43 @@
             <optional>true</optional>
         </dependency>
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.62</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>xyz.ipush</groupId>
+                <artifactId>info-push-common</artifactId>
+                <version>${info-push-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>xyz.ipush</groupId>
+                <artifactId>info-push-message</artifactId>
+                <version>${info-push-message.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>xyz.ipush</groupId>
+                <artifactId>info-push-finder</artifactId>
+                <version>${info-push-finder.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>xyz.ipush</groupId>
+                <artifactId>info-push-scheduler</artifactId>
+                <version>${info-push-scheduler.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>xyz.ipush</groupId>
+                <artifactId>info-push-sender</artifactId>
+                <version>${info-push-sender.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

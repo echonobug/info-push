@@ -8,7 +8,6 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>info-push-sender</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>info-push-sender</name>
     <description>信息发送</description>
 
@@ -20,6 +19,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>xyz.ipush</groupId>
+            <artifactId>info-push-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>xyz.ipush</groupId>
+            <artifactId>info-push-message</artifactId>
         </dependency>
     </dependencies>
 

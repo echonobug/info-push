@@ -1,0 +1,5 @@
+spring:
+  kafka:
+    bootstrap-servers: "47.94.18.106:9092"
+    consumer:
+      group-id: "infoPush"

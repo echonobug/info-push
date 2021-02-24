@@ -1,12 +1,12 @@
 package xyz.ipush.web.controller;
 
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import xyz.ipush.web.entity.ResponseEntity;
 import xyz.ipush.web.exception.IPushException;
 import xyz.ipush.web.service.UserService;
 import xyz.ipush.web.vo.UserLoginVO;
 import xyz.ipush.web.vo.UserRegisterVO;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -33,7 +33,11 @@ public class UserController {
 
     @PostMapping("login")
     ResponseEntity login(@Validated @RequestBody UserLoginVO userVO) {
-        return ResponseEntity.success(userService.login(userVO));
+        try {
+            return ResponseEntity.success(userService.login(userVO));
+        } catch (IPushException e) {
+            return ResponseEntity.error(e);
+        }
     }
 
     @GetMapping("info")
@@ -49,6 +53,26 @@ public class UserController {
         } catch (IPushException e) {
             return ResponseEntity.error(e);
         }
+    }
+
+    @GetMapping("active")
+    ResponseEntity active(String content) {
+        try {
+            userService.active(content);
+        } catch (IPushException e) {
+            return ResponseEntity.error(e);
+        }
+        return ResponseEntity.success("激活成功！");
+    }
+
+    @GetMapping("validateUsername")
+    ResponseEntity validateUsername(String username) {
+        try {
+            userService.validateUsername(username);
+        } catch (IPushException e) {
+            return ResponseEntity.error(e);
+        }
+        return ResponseEntity.success("该用户名可用！");
     }
 
 }

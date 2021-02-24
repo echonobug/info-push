@@ -14,5 +14,7 @@ public class UserRegisterVO {
     @NonNull
     String email;
     @NonNull
+    String username;
+    @NonNull
     String password;
 }
