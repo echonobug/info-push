@@ -62,11 +62,14 @@ public class AccessLogInterceptor implements HandlerInterceptor {
         AccessLog accessLog = (AccessLog) request.getAttribute(LOGGER_ACCESS_LOG);
         int status = response.getStatus();
         accessLog.setResponseStatus(status);
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof User) {
-            accessLog.setUserName(((User) principal).getUsername());
-        } else {
-            accessLog.setUserName(GUEST_USER_NAME);
+        try {
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if (principal instanceof User) {
+                accessLog.setUserName(((User) principal).getUsername());
+            } else {
+                accessLog.setUserName(GUEST_USER_NAME);
+            }
+        } catch (Exception exception) {
         }
         long currentTime = System.currentTimeMillis();
         long snedTime = Long.parseLong(request.getAttribute(LOGGER_SEND_TIME).toString());

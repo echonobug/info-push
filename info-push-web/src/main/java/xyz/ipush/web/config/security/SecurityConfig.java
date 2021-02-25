@@ -1,10 +1,10 @@
 package xyz.ipush.web.config.security;
 
-import xyz.ipush.web.config.filter.TokenFilter;
-import xyz.ipush.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import xyz.ipush.web.config.filter.TokenFilter;
+import xyz.ipush.web.service.UserService;
 
 /**
  * Spring Security配置
@@ -41,10 +43,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .accessDeniedHandler(customAccessDeniedHandler)
                 .authenticationEntryPoint(customAuthenticationEntryPoint)
                 .and().authorizeRequests((authorize) -> authorize
-                .antMatchers("/user/login","/user/register","/user/active","/user/validateUsername").permitAll()
+                .antMatchers("/user/login", "/user/register", "/user/active", "/user/validateUsername").permitAll()
                 .anyRequest().authenticated());
     }
 
+    @Override
+    public void configure(WebSecurity web) {
+        web.ignoring().antMatchers(
+                "/v3/api-docs",
+                "/swagger-resources/**",
+                "/swagger-ui/**",
+                "/webjars/**");
+    }
 
     @Bean
     @Override
