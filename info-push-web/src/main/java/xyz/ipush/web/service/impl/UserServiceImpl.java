@@ -2,7 +2,7 @@ package xyz.ipush.web.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -37,14 +37,17 @@ import java.util.List;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService, UserDetailsService {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
-    private TokenUtil tokenUtil;
-    @Autowired
-    private EnvUtil envUtil;
-    @Autowired
-    private KafkaProducer kafkaProducer;
+    private final PasswordEncoder passwordEncoder;
+    private final TokenUtil tokenUtil;
+    private final EnvUtil envUtil;
+    private final KafkaProducer kafkaProducer;
+
+    public UserServiceImpl(PasswordEncoder passwordEncoder, TokenUtil tokenUtil, EnvUtil envUtil, KafkaProducer kafkaProducer) {
+        this.passwordEncoder = passwordEncoder;
+        this.tokenUtil = tokenUtil;
+        this.envUtil = envUtil;
+        this.kafkaProducer = kafkaProducer;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
@@ -90,13 +93,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         save(user);
         UserActiveDTO userActiveDTO = new UserActiveDTO();
         userActiveDTO.setEmail(user.getEmail());
-        String activeUrl = String.format("%s/user/active?content=%s",envUtil.getServerUrl(),Base64.getEncoder().encodeToString(user.getId().getBytes()));
+        String activeUrl = String.format("%s/user/active?content=%s", envUtil.getServerUrl(), Base64.getEncoder().encodeToString(user.getId().getBytes()));
         userActiveDTO.setActiveUrl(activeUrl);
         kafkaProducer.send(KafkaProducer.TOPIC_EMAIL_ACTIVE, JSON.toJSONString(userActiveDTO));
     }
 
     @Override
     public void active(String content) throws IPushException {
+        if (Strings.isEmpty(content)) {
+            throw IPushException.build(ErrorCodeEnum.INVALID_ACTIVE_URL);
+        }
         String id = new String(Base64.getDecoder().decode(content));
         User user = getById(id);
         if (user == null) {
@@ -109,7 +115,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public void validateUsername(String username) throws IPushException {
         int size = query().eq("name", username).list().size();
-        if(size>0){
+        if (size > 0) {
             throw IPushException.build(ErrorCodeEnum.USERNAME_ALREADY_EXISTS);
         }
     }

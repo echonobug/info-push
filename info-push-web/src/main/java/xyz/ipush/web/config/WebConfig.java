@@ -1,10 +1,9 @@
 package xyz.ipush.web.config;
 
-import xyz.ipush.web.config.interceptor.AccessLogInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import xyz.ipush.web.config.interceptor.AccessLogInterceptor;
 
 /**
  * web 配置
@@ -15,8 +14,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Autowired
-    private AccessLogInterceptor accessLogInterceptor;
+    private final AccessLogInterceptor accessLogInterceptor;
+
+    public WebConfig(AccessLogInterceptor accessLogInterceptor) {
+        this.accessLogInterceptor = accessLogInterceptor;
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

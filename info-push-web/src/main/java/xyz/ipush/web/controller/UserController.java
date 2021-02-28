@@ -1,5 +1,7 @@
 package xyz.ipush.web.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import xyz.ipush.web.entity.ResponseEntity;
@@ -26,11 +28,13 @@ public class UserController {
         this.userService = userService;
     }
 
+    @ApiOperation("获取系统用户列表")
     @GetMapping("list")
     ResponseEntity list() {
         return ResponseEntity.success(userService.list());
     }
 
+    @ApiOperation("用户登录")
     @PostMapping("login")
     ResponseEntity login(@Validated @RequestBody UserLoginVO userVO) {
         try {
@@ -40,11 +44,13 @@ public class UserController {
         }
     }
 
+    @ApiOperation("获取当前登录用户信息")
     @GetMapping("info")
     ResponseEntity info() {
         return ResponseEntity.success(userService.getInfo());
     }
 
+    @ApiOperation("用户注册")
     @PostMapping("register")
     ResponseEntity register(@Validated @RequestBody UserRegisterVO userVO) {
         try {
@@ -55,8 +61,9 @@ public class UserController {
         }
     }
 
+    @ApiOperation("账号激活")
     @GetMapping("active")
-    ResponseEntity active(String content) {
+    ResponseEntity active(@ApiParam("账号信息") String content) {
         try {
             userService.active(content);
         } catch (IPushException e) {
@@ -65,8 +72,9 @@ public class UserController {
         return ResponseEntity.success("激活成功！");
     }
 
+    @ApiOperation("验证用户名是否可用")
     @GetMapping("validateUsername")
-    ResponseEntity validateUsername(String username) {
+    ResponseEntity validateUsername(@ApiParam("用户名") String username) {
         try {
             userService.validateUsername(username);
         } catch (IPushException e) {

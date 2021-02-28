@@ -1,5 +1,6 @@
 package xyz.ipush.web.vo;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NonNull;
 
@@ -11,10 +12,13 @@ import lombok.NonNull;
  */
 @Data
 public class UserRegisterVO {
+    @ApiModelProperty("邮箱")
     @NonNull
     String email;
+    @ApiModelProperty("用户名")
     @NonNull
     String username;
+    @ApiModelProperty("密码")
     @NonNull
     String password;
 }

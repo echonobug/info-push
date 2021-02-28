@@ -1,5 +1,6 @@
 package xyz.ipush.web.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import xyz.ipush.web.exception.ErrorCodeEnum;
 import xyz.ipush.web.exception.IPushException;
 import lombok.Data;
@@ -12,8 +13,11 @@ import lombok.Data;
  */
 @Data
 public class ResponseEntity {
+    @ApiModelProperty("请求响应状态码")
     private Integer code;
+    @ApiModelProperty("请求响应信息")
     private String msg;
+    @ApiModelProperty("请求响应数据")
     private Object data;
 
     /**

@@ -1,14 +1,13 @@
 package xyz.ipush.web.config.interceptor;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerInterceptor;
 import xyz.ipush.web.entity.AccessLog;
 import xyz.ipush.web.entity.User;
 import xyz.ipush.web.mapper.AccessLogMapper;
 import xyz.ipush.web.util.IpUtil;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,8 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class AccessLogInterceptor implements HandlerInterceptor {
 
-    @Autowired
-    private AccessLogMapper accessLogMapper;
+    private final AccessLogMapper accessLogMapper;
 
     /**
      * 请求开始时间标识
@@ -41,6 +39,10 @@ public class AccessLogInterceptor implements HandlerInterceptor {
      * 未登录用户
      */
     private static final String GUEST_USER_NAME = "未登录用户";
+
+    public AccessLogInterceptor(AccessLogMapper accessLogMapper) {
+        this.accessLogMapper = accessLogMapper;
+    }
 
     /**
      * 进入Controller之前开始记录日志实体
@@ -69,7 +71,7 @@ public class AccessLogInterceptor implements HandlerInterceptor {
             } else {
                 accessLog.setUserName(GUEST_USER_NAME);
             }
-        } catch (Exception exception) {
+        } catch (Exception ignored) {
         }
         long currentTime = System.currentTimeMillis();
         long snedTime = Long.parseLong(request.getAttribute(LOGGER_SEND_TIME).toString());
