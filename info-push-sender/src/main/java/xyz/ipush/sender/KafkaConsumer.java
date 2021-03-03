@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
-import xyz.ipush.message.KafkaProducer;
+import xyz.ipush.message.IPushKafkaProducer;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -22,7 +22,7 @@ import java.io.IOException;
 public class KafkaConsumer {
     @Autowired
     private MailService mailService;
-    @KafkaListener(topics = KafkaProducer.TOPIC_EMAIL_ACTIVE)
+    @KafkaListener(topics = IPushKafkaProducer.TOPIC_EMAIL_ACTIVE)
     public void processMessage(String content) {
         log.info("收到一条消息====="+content);
         try {

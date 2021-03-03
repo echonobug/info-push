@@ -3,6 +3,7 @@ package xyz.ipush.web.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.logging.log4j.util.Strings;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,7 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import xyz.ipush.common.dto.UserActiveDTO;
-import xyz.ipush.message.KafkaProducer;
+import xyz.ipush.message.IPushKafkaProducer;
 import xyz.ipush.web.dto.UserDTO;
 import xyz.ipush.web.entity.User;
 import xyz.ipush.web.exception.ErrorCodeEnum;
@@ -37,17 +38,14 @@ import java.util.List;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService, UserDetailsService {
 
-    private final PasswordEncoder passwordEncoder;
-    private final TokenUtil tokenUtil;
-    private final EnvUtil envUtil;
-    private final KafkaProducer kafkaProducer;
-
-    public UserServiceImpl(PasswordEncoder passwordEncoder, TokenUtil tokenUtil, EnvUtil envUtil, KafkaProducer kafkaProducer) {
-        this.passwordEncoder = passwordEncoder;
-        this.tokenUtil = tokenUtil;
-        this.envUtil = envUtil;
-        this.kafkaProducer = kafkaProducer;
-    }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private TokenUtil tokenUtil;
+    @Autowired
+    private EnvUtil envUtil;
+    @Autowired
+    private IPushKafkaProducer iPushKafkaProducer;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
@@ -95,7 +93,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         userActiveDTO.setEmail(user.getEmail());
         String activeUrl = String.format("%s/user/active?content=%s", envUtil.getServerUrl(), Base64.getEncoder().encodeToString(user.getId().getBytes()));
         userActiveDTO.setActiveUrl(activeUrl);
-        kafkaProducer.send(KafkaProducer.TOPIC_EMAIL_ACTIVE, JSON.toJSONString(userActiveDTO));
+        iPushKafkaProducer.send(IPushKafkaProducer.TOPIC_EMAIL_ACTIVE, JSON.toJSONString(userActiveDTO));
     }
 
     @Override

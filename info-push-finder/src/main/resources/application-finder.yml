@@ -1,0 +1,4 @@
+ipush:
+  finder:
+    phantomjs:
+      command: phantomjs

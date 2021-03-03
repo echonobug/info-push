@@ -82,6 +82,11 @@
             <version>1.1.1</version>
         </dependency>
         <!-- #end:高版本jdk使用jjwt-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -97,9 +102,9 @@
                 <!-- mvn com.baomidou:mybatisplus-maven-plugin:1.0:code -Dmysql.pwd= -->
                 <configuration>
                     <!-- 输出目录(默认java.io.tmpdir) -->
-                    <outputDir>H:\info-push-generator\src\main\java</outputDir>
+                    <outputDir>H:\info-push\info-push-web\src\main\java</outputDir>
                     <!--mapper.xml的输出目录(默认与outputDir一致)-->
-                    <xmlOutputDir>H:\info-push-generator\src\main\resources</xmlOutputDir>
+                    <xmlOutputDir>H:\info-push\info-push-web\src\main\resources</xmlOutputDir>
                     <!-- 是否覆盖同名文件(默认false) -->
                     <fileOverride>true</fileOverride>
                     <!-- mapper.xml 中添加二级缓存配置(默认true) -->
@@ -134,8 +139,10 @@
                         <!--<property>table1</property>-->
                         <!--</include>-->
                         <include>
-                            <property>user</property>
-                            <property>access_log</property>
+<!--                            <property>user</property>-->
+<!--                            <property>access_log</property>-->
+                            <property>info_define</property>
+                            <property>info_data</property>
                             <!--<property>table1</property>-->
                         </include>
                         <!-- 要排除的表 -->
