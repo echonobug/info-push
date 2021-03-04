@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.ipush.web.mapper.InfoDefineMapper">
+
+	<resultMap id="BaseResultMap" type="xyz.ipush.web.entity.InfoDefine">
+		<id column="id" property="id" />
+		<result column="content" property="content" />
+		<result column="enable_update" property="enableUpdate" />
+		<result column="update_cron" property="updateCron" />
+		<result column="creator_id" property="creatorId" />
+		<result column="create_time" property="createTime" />
+	</resultMap>
+	<insert id="insertSelective" parameterType="xyz.ipush.web.entity.InfoDefine">
+		insert into info_define
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+			<if test="enableUpdate != null">
+				enable_update,
+			</if>
+			<if test="updateCron != null">
+				update_cron,
+			</if>
+			<if test="creatorId != null">
+				creator_id,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id},
+			</if>
+			<if test="content != null">
+				#{content},
+			</if>
+			<if test="enableUpdate != null">
+				#{enableUpdate},
+			</if>
+			<if test="updateCron != null">
+				#{updateCron},
+			</if>
+			<if test="creatorId != null">
+				#{creatorId},
+			</if>
+			<if test="createTime != null">
+				#{createTime},
+			</if>
+		</trim>
+	</insert>
+</mapper>
