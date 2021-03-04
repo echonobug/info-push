@@ -25,7 +25,7 @@ public class SpiderTest {
             "      {\n" +
             "        \"render\": true,\n" +
             "        \"request\": {\n" +
-            "          \"url\": \"https://www.baidu.com\",\n" +
+            "          \"url\": \"http://www.weather.com.cn/weather/101270101.shtml\",\n" +
             "          \"method\": \"get\",\n" +
             "          \"header\": \"\",\n" +
             "          \"cookies\": \"\"\n" +
@@ -45,8 +45,13 @@ public class SpiderTest {
             "            \"parser\": \"xsoup\",\n" +
             "            \"content\": [\n" +
             "              {\n" +
-            "                \"field_name\": \"\",\n" +
-            "                \"selector\": \"\",\n" +
+            "                \"field_name\": \"wea\",\n" +
+            "                \"selector\": \"//*[@id=\\\"7d\\\"]/ul/li[1]/p[1]/text()\",\n" +
+            "                \"extra\": {}\n" +
+            "              }\n" +
+            "              {\n" +
+            "                \"field_name\": \"tem\",\n" +
+            "                \"selector\": \"//*[@id=\\\"7d\\\"]/ul/li[1]/p[2]/i/text()\",\n" +
             "                \"extra\": {}\n" +
             "              }\n" +
             "            ]\n" +

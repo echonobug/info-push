@@ -12,6 +12,8 @@ import java.util.List;
  */
 @Data
 public class IPushParse {
+    public static final String XSOUP = "xsoup";
+    public static final String JSOUP = "jsoup";
     /**
      * 解析器
      */

@@ -1,17 +1,17 @@
-package xyz.ipush.finder;
+package xyz.ipush.sender;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * 启动类
+ * sender 启动类
  *
  * @author jwei
- * @date 2021/3/2
+ * @date 2021/3/4
  */
-@SpringBootApplication
-public class App {
+@SpringBootApplication(scanBasePackages = "xyz.ipush.*")
+public class Sender {
     public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+        SpringApplication.run(Sender.class, args);
     }
 }

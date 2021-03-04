@@ -12,5 +12,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2021/03/02
  */
 public interface InfoDataService extends IService<InfoData> {
-	
+    /**
+     * 处理 kafka 消息
+     *
+     * @param content
+     */
+    void processMessage(String content);
 }

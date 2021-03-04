@@ -1,4 +1,4 @@
-package xyz.ipush.sender;
+package xyz.ipush.sender.service;
 
 
 import freemarker.template.Configuration;

@@ -11,11 +11,5 @@
 
     <artifactId>info-push-common</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
-        </dependency>
-    </dependencies>
 
 </project>

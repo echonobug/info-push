@@ -52,7 +52,7 @@ public class IPushSpider {
                 .addPipeline(ipushPipeline)
                 .setUUID(infoSpiderDTO.getId())
                 .setDownloader(render ? iPushPhantomJsDownloader : ipushHttpClientDownloader)
-                .thread(requests.size() > 5 ? 5 : requests.size())
+                .thread(Math.min(requests.size(), 5))
                 .run();
     }
 }

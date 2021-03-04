@@ -1,4 +1,4 @@
-package xyz.ipush.sender;
+package xyz.ipush.sender.task;
 
 import com.alibaba.fastjson.JSONObject;
 import freemarker.template.TemplateException;
@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 import xyz.ipush.message.IPushKafkaProducer;
+import xyz.ipush.sender.service.MailService;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -19,7 +20,7 @@ import java.io.IOException;
  */
 @Component
 @Slf4j
-public class KafkaConsumer {
+public class SenderTask {
     @Autowired
     private MailService mailService;
     @KafkaListener(topics = IPushKafkaProducer.TOPIC_EMAIL_ACTIVE)
