@@ -1,9 +1,6 @@
 package xyz.ipush.web.config.filter;
 
-import xyz.ipush.web.service.UserService;
-import xyz.ipush.web.util.TokenUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,7 +9,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+import xyz.ipush.web.service.UserService;
+import xyz.ipush.web.util.TokenUtil;
 
+import javax.annotation.Resource;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -28,10 +28,10 @@ import java.io.IOException;
 @Component
 @Slf4j
 public class TokenFilter extends OncePerRequestFilter {
-    @Autowired
+    @Resource
     private TokenUtil tokenUtil;
 
-    @Autowired
+    @Resource
     private UserService userService;
 
     @Override

@@ -14,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface InfoDefineService extends IService<InfoDefine> {
 
     void testFind(String id);
+    void testSend(String id);
 }

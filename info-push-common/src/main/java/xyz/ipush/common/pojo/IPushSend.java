@@ -10,6 +10,11 @@ import lombok.Data;
  */
 @Data
 public class IPushSend {
+    public static final String EMAIL_HTML = "email_html";
+    /**
+     * 信息主题
+     */
+    private String subject;
     /**
      * 信息类型
      */

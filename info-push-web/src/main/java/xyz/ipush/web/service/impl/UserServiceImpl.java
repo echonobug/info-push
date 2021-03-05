@@ -3,7 +3,6 @@ package xyz.ipush.web.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.logging.log4j.util.Strings;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,6 +23,7 @@ import xyz.ipush.web.util.TokenUtil;
 import xyz.ipush.web.vo.UserLoginVO;
 import xyz.ipush.web.vo.UserRegisterVO;
 
+import javax.annotation.Resource;
 import java.util.Base64;
 import java.util.List;
 
@@ -38,13 +38,13 @@ import java.util.List;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService, UserDetailsService {
 
-    @Autowired
+    @Resource
     private PasswordEncoder passwordEncoder;
-    @Autowired
+    @Resource
     private TokenUtil tokenUtil;
-    @Autowired
+    @Resource
     private EnvUtil envUtil;
-    @Autowired
+    @Resource
     private IPushKafkaProducer iPushKafkaProducer;
 
     @Override

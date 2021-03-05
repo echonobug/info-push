@@ -5,9 +5,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -15,11 +13,11 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
+import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -40,19 +38,10 @@ public class MailService {
     @Value("${spring.mail.username}")
     private String from;
 
+    @Resource
     private JavaMailSender mailSender;
+    @Resource
     private Configuration configuration;
-
-    @Autowired
-    public void setMailSender(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
-    }
-
-    @Autowired
-    public void setConfiguration(Configuration configuration) {
-        this.configuration = configuration;
-    }
-
 
     public void sendText(String subject, String text, String... to) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -76,6 +65,7 @@ public class MailService {
         mimeMessageHelper.setSubject(subject);
         mimeMessageHelper.setText(text + "<img src=\"cid:test.jpg\">", true);
         URL url = this.getClass().getClassLoader().getResource("static/img/test.jpg");
+        assert url != null;
         mimeMessageHelper.addInline("test.jpg",new File(url.toURI()));
         mailSender.send(mimeMessage);
     }
@@ -97,5 +87,22 @@ public class MailService {
         mimeMessageHelper.setText(content, true);
         mailSender.send(mimeMessage);
         log.info(Thread.currentThread().getName() + "______发送邮件完成");
+    }
+
+    @Async
+    public void sendRawHtml(String subject, String html, Map<String,Object> model, String... to) throws MessagingException, IOException, TemplateException {
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+        try {
+            mimeMessageHelper.setFrom(from, nickname);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Template template = new Template(subject, html, configuration);
+        String content = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
+        mimeMessageHelper.setTo(to);
+        mimeMessageHelper.setSubject(subject);
+        mimeMessageHelper.setText(content, true);
+        mailSender.send(mimeMessage);
     }
 }

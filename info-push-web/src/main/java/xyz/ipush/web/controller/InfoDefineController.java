@@ -1,10 +1,11 @@
 package xyz.ipush.web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import xyz.ipush.web.service.InfoDefineService;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -17,11 +18,16 @@ import xyz.ipush.web.service.InfoDefineService;
 @RestController
 @RequestMapping("infodefine")
 public class InfoDefineController {
-    @Autowired
+    @Resource
     private InfoDefineService infoDefineService;
 
     @GetMapping("find")
     public void find(String id) {
         infoDefineService.testFind(id);
+    }
+
+    @GetMapping("send")
+    public void send(String id) {
+        infoDefineService.testSend(id);
     }
 }

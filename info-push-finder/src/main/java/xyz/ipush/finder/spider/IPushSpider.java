@@ -1,6 +1,5 @@
 package xyz.ipush.finder.spider;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Spider;
@@ -9,6 +8,7 @@ import xyz.ipush.common.dto.InfoSpiderDTO;
 import xyz.ipush.common.pojo.IPushFind;
 import xyz.ipush.common.pojo.IPushRequest;
 
+import javax.annotation.Resource;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,13 +20,13 @@ import java.util.List;
  */
 @Component
 public class IPushSpider {
-    @Autowired
+    @Resource
     private IPushPageProcessor ipushPageProcessor;
-    @Autowired
+    @Resource
     private IPushPipeline ipushPipeline;
-    @Autowired
+    @Resource
     private IPushHttpClientDownloader ipushHttpClientDownloader;
-    @Autowired
+    @Resource
     private IPushPhantomJsDownloader iPushPhantomJsDownloader;
 
     public void run(InfoSpiderDTO infoSpiderDTO) {

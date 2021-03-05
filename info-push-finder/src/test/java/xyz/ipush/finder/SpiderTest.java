@@ -1,13 +1,13 @@
 package xyz.ipush.finder;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import xyz.ipush.common.dto.InfoSpiderDTO;
 import xyz.ipush.common.pojo.IPushInfoDefineContent;
 import xyz.ipush.finder.spider.IPushSpider;
+
+import javax.annotation.Resource;
 
 /**
  * 爬虫测试类
@@ -17,10 +17,10 @@ import xyz.ipush.finder.spider.IPushSpider;
  */
 @SpringBootTest
 public class SpiderTest {
-    @Autowired
+    @Resource
     private IPushSpider ipushSpider;
 
-    private String content = "{\n" +
+    private final String content = "{\n" +
             "    \"find\": [\n" +
             "      {\n" +
             "        \"render\": true,\n" +
@@ -64,8 +64,9 @@ public class SpiderTest {
             "      \"content\": \"html\"\n" +
             "    }\n" +
             "  }";
+
     @Test
-    void run(){
+    void run() {
         InfoSpiderDTO infoSpiderDTO = new InfoSpiderDTO();
         infoSpiderDTO.setId("12345");
         IPushInfoDefineContent iPushInfoDefineContent = JSONObject.parseObject(content, IPushInfoDefineContent.class);
@@ -74,7 +75,7 @@ public class SpiderTest {
     }
 
     @Test
-    void jsonParse(){
+    void jsonParse() {
 
         IPushInfoDefineContent iPushInfoDefineContent = JSONObject.parseObject(content, IPushInfoDefineContent.class);
         System.out.println(iPushInfoDefineContent);

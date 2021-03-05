@@ -1,13 +1,14 @@
 package xyz.ipush.finder.spider;
 
 import com.alibaba.fastjson.JSON;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 import xyz.ipush.common.dto.InfoDataDTO;
 import xyz.ipush.message.IPushKafkaProducer;
+
+import javax.annotation.Resource;
 
 /**
  * Ipush Pipeline
@@ -18,7 +19,7 @@ import xyz.ipush.message.IPushKafkaProducer;
 @Component
 public class IPushPipeline implements Pipeline {
 
-    @Autowired
+    @Resource
     private IPushKafkaProducer iPushKafkaProducer;
 
     @Override

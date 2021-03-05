@@ -1,8 +1,6 @@
 package xyz.ipush.web.config.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,6 +13,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import xyz.ipush.web.config.filter.TokenFilter;
 import xyz.ipush.web.service.UserService;
 
+import javax.annotation.Resource;
+
 /**
  * Spring Security配置
  *
@@ -23,13 +23,13 @@ import xyz.ipush.web.service.UserService;
  */
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
+    @Resource
     private UserService userService;
-    @Autowired
+    @Resource
     private TokenFilter tokenFilter;
-    @Autowired
+    @Resource
     private CustomAccessDeniedHandler customAccessDeniedHandler;
-    @Autowired
+    @Resource
     private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     @Override

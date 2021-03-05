@@ -1,14 +1,15 @@
 package xyz.ipush.web.mp;
 
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import xyz.ipush.web.entity.AccessLog;
 import xyz.ipush.web.entity.User;
 import xyz.ipush.web.mapper.AccessLogMapper;
 import xyz.ipush.web.mapper.UserMapper;
 import xyz.ipush.web.service.UserService;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+
+import javax.annotation.Resource;
 
 /**
  * mybatis plus 测试
@@ -20,13 +21,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class MPTest {
 
-    @Autowired
+    @Resource
     private UserService userService;
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
-    @Autowired
+    @Resource
     private AccessLogMapper accessLogMapper;
 
     @Test
