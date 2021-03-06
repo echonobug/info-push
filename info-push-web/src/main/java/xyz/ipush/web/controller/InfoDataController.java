@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2021/03/02
  */
 @RestController
-@RequestMapping("infodata")
+@RequestMapping("infoData")
 public class InfoDataController {
+
 
 }

@@ -15,7 +15,7 @@ import lombok.Data;
  * </p>
  *
  * @author jwei
- * @date 2021/03/02
+ * @date 2021/03/05
  */
 @Data
 @TableName("info_define")
@@ -29,6 +29,24 @@ public class InfoDefine implements Serializable {
      */
     @TableField(value = "id")
     private String id;
+
+    /**
+     * 标题
+     */
+    @TableField(value = "title")
+    private String title;
+
+    /**
+     * 
+     */
+    @TableField(value = "description")
+    private String description;
+
+    /**
+     * 图片url
+     */
+    @TableField(value = "image")
+    private String image;
 
     /**
      * 

@@ -15,7 +15,7 @@ import javax.mail.MessagingException;
 import java.io.IOException;
 
 /**
- * 消费者
+ * 消息发送任务
  *
  * @author jwei
  * @date 2021/1/29

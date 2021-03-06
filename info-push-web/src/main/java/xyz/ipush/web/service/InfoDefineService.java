@@ -3,6 +3,8 @@ package xyz.ipush.web.service;
 import xyz.ipush.web.entity.InfoDefine;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 服务类
@@ -15,4 +17,5 @@ public interface InfoDefineService extends IService<InfoDefine> {
 
     void testFind(String id);
     void testSend(String id);
+
 }

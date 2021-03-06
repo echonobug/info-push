@@ -1,6 +1,8 @@
 package xyz.ipush.web.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import xyz.ipush.common.dto.EmailHtmlDTO;
@@ -16,6 +18,7 @@ import xyz.ipush.web.service.InfoDefineService;
 
 import javax.annotation.Resource;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * <p>
@@ -32,6 +35,7 @@ public class InfoDefineServiceImpl extends ServiceImpl<InfoDefineMapper, InfoDef
     private IPushKafkaProducer iPushKafkaProducer;
     @Resource
     private InfoDataService infoDataService;
+
 
     @Override
     public void testFind(String id) {
@@ -56,4 +60,5 @@ public class InfoDefineServiceImpl extends ServiceImpl<InfoDefineMapper, InfoDef
         emailHtmlDTO.setHtml(iPushSend.getContent());
         iPushKafkaProducer.send(IPushKafkaProducer.TOPIC_EMAIL_INFO, JSON.toJSONString(emailHtmlDTO));
     }
+
 }

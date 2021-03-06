@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
  * </p>
  *
  * @author jwei
- * @date 2021/03/02
+ * @date 2021/03/05
  */
 @Mapper
 public interface InfoDefineMapper extends BaseMapper<InfoDefine> {

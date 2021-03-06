@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2020/12/18
  */
 @RestController
-@RequestMapping("accesslog")
+@RequestMapping("accessLog")
 public class AccessLogController {
 
 }

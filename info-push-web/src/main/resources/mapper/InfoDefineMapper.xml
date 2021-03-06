@@ -4,6 +4,9 @@
 
 	<resultMap id="BaseResultMap" type="xyz.ipush.web.entity.InfoDefine">
 		<id column="id" property="id" />
+		<result column="title" property="title" />
+		<result column="description" property="description" />
+		<result column="image" property="image" />
 		<result column="content" property="content" />
 		<result column="enable_update" property="enableUpdate" />
 		<result column="update_cron" property="updateCron" />
@@ -15,6 +18,15 @@
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
 				id,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="image != null">
+				image,
 			</if>
 			<if test="content != null">
 				content,
@@ -35,6 +47,15 @@
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="id != null">
 				#{id},
+			</if>
+			<if test="title != null">
+				#{title},
+			</if>
+			<if test="description != null">
+				#{description},
+			</if>
+			<if test="image != null">
+				#{image},
 			</if>
 			<if test="content != null">
 				#{content},
