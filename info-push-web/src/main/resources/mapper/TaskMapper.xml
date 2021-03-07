@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.ipush.web.mapper.TaskMapper">
+    <select id="listFindTask" resultType="java.util.Map">
+
+
+    </select>
+    <select id="listTask" resultType="java.util.Map">
+        select id.id, 'find' type, id.title, id.update_cron cron, !isnull(qjd.JOB_NAME) online, count(j.id) cnt
+        from info_define id
+                 left join qrtz_job_details qjd on id.id = qjd.JOB_NAME and qjd.JOB_GROUP = 'find'
+                 left join job j on id.id = j.job_name and j.group_name = 'find'
+        group by id, type, title, cron, online
+        union all
+        select s.id, 'send' type, id.title, s.cron, !isnull(qjd.JOB_NAME) online, count(j.id) cnt
+        from subscription s
+                 left join info_define id on id.id = s.info_define_id
+                 left join qrtz_job_details qjd on s.id = qjd.JOB_NAME and qjd.JOB_GROUP = 'send'
+                 left join job j on s.id = j.job_name and j.group_name = 'send'
+        group by id, type, title, cron, online
+    </select>
+</mapper>

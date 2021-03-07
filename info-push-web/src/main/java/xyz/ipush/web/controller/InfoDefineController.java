@@ -25,12 +25,12 @@ public class InfoDefineController {
 
     @GetMapping("find")
     public void find(String id) {
-        infoDefineService.testFind(id);
+        infoDefineService.find(id);
     }
 
     @GetMapping("send")
     public void send(String id) {
-        infoDefineService.testSend(id);
+        infoDefineService.send(id);
     }
 
     @ApiOperation("获取信息定义分页数据")

@@ -19,7 +19,6 @@
         <module>info-push-web</module>
         <module>info-push-sender</module>
         <module>info-push-finder</module>
-        <module>info-push-scheduler</module>
         <module>info-push-common</module>
         <module>info-push-message</module>
     </modules>
@@ -29,7 +28,6 @@
         <maven.compiler.source>14</maven.compiler.source>
         <maven.compiler.target>14</maven.compiler.target>
         <info-push-sender.version>0.0.1-SNAPSHOT</info-push-sender.version>
-        <info-push-scheduler.version>0.0.1-SNAPSHOT</info-push-scheduler.version>
         <info-push-finder.version>0.0.1-SNAPSHOT</info-push-finder.version>
         <info-push-message.version>0.0.1-SNAPSHOT</info-push-message.version>
         <info-push-common.version>0.0.1-SNAPSHOT</info-push-common.version>
@@ -98,11 +96,6 @@
                 <groupId>xyz.ipush</groupId>
                 <artifactId>info-push-finder</artifactId>
                 <version>${info-push-finder.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>xyz.ipush</groupId>
-                <artifactId>info-push-scheduler</artifactId>
-                <version>${info-push-scheduler.version}</version>
             </dependency>
             <dependency>
                 <groupId>xyz.ipush</groupId>

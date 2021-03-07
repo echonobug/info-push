@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface InfoDefineService extends IService<InfoDefine> {
 
-    void testFind(String id);
-    void testSend(String id);
+    void find(String id);
+    void send(String id);
 
 }

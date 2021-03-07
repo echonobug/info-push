@@ -23,10 +23,6 @@
         </dependency>
         <dependency>
             <groupId>xyz.ipush</groupId>
-            <artifactId>info-push-scheduler</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>xyz.ipush</groupId>
             <artifactId>info-push-message</artifactId>
         </dependency>
         <dependency>
@@ -51,6 +47,10 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
@@ -142,11 +142,12 @@
                         <!--<property>table1</property>-->
                         <!--</include>-->
                         <include>
-<!--                            <property>user</property>-->
-<!--                            <property>access_log</property>-->
-<!--                            <property>info_define</property>-->
-<!--                            <property>info_data</property>-->
-                            <property>subscription</property>
+                            <!--                            <property>user</property>-->
+                            <!--                            <property>access_log</property>-->
+                            <!--                            <property>info_define</property>-->
+                            <!--                            <property>info_data</property>-->
+<!--                            <property>subscription</property>-->
+                            <property>job</property>
                             <!--<property>table1</property>-->
                         </include>
                         <!-- 要排除的表 -->

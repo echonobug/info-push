@@ -68,7 +68,7 @@ public class SpiderTest {
     @Test
     void run() {
         InfoSpiderDTO infoSpiderDTO = new InfoSpiderDTO();
-        infoSpiderDTO.setId("12345");
+        infoSpiderDTO.setId("123456");
         IPushInfoDefineContent iPushInfoDefineContent = JSONObject.parseObject(content, IPushInfoDefineContent.class);
         infoSpiderDTO.setFind(iPushInfoDefineContent.getFind());
         ipushSpider.run(infoSpiderDTO);
