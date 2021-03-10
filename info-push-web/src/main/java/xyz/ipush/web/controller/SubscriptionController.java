@@ -5,6 +5,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import xyz.ipush.web.entity.ResponseEntity;
 import xyz.ipush.web.entity.Subscription;
+import xyz.ipush.web.exception.IPushException;
 import xyz.ipush.web.service.SubscriptionService;
 import xyz.ipush.web.util.SecurityContextUtil;
 import xyz.ipush.web.vo.SubscriptionVO;
@@ -29,12 +30,12 @@ public class SubscriptionController {
     @ApiOperation("信息订阅")
     @PostMapping("subscribe")
     public ResponseEntity subscribe(@Validated @RequestBody SubscriptionVO subscriptionVO) {
-        Subscription subscription = new Subscription();
-        subscription.setInfoDefineId(subscriptionVO.getId());
-        subscription.setUserId(SecurityContextUtil.getUser().getId());
-        subscription.setCron(subscriptionVO.getCron());
-        subscriptionService.save(subscription);
-        return ResponseEntity.success("信息订阅成功！");
+        try {
+            subscriptionService.subscribe(subscriptionVO);
+            return ResponseEntity.success("信息订阅成功！");
+        } catch (IPushException e) {
+            return ResponseEntity.error(e);
+        }
     }
 
     @ApiOperation("获取订阅信息分页数据")
@@ -49,8 +50,12 @@ public class SubscriptionController {
     @ApiOperation("取消信息订阅")
     @GetMapping("cancel")
     public ResponseEntity cancel(String id) {
-        subscriptionService.removeById(id);
-        return ResponseEntity.success("取消订阅成功！");
+        try {
+            subscriptionService.cancel(id);
+            return ResponseEntity.success("取消订阅成功！");
+        } catch (IPushException e) {
+            return ResponseEntity.error(e);
+        }
     }
 
     @ApiOperation("更新信息订阅")

@@ -1,7 +1,11 @@
 package xyz.ipush.web.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
+import xyz.ipush.web.entity.ResponseEntity;
+import xyz.ipush.web.service.JobService;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -11,8 +15,20 @@ import org.springframework.web.bind.annotation.RestController;
  * @author jwei
  * @date 2021/03/07
  */
+@CrossOrigin
 @RestController
 @RequestMapping("job")
 public class JobController {
+
+    @Resource
+    private JobService jobService;
+
+    @ApiOperation("获取任务执行日志")
+    @GetMapping("log")
+    public ResponseEntity log(@RequestParam(name = "page", defaultValue = "1") Integer page,
+                              @RequestParam(name = "size", defaultValue = "5") Integer size,
+                              String groupName, String jobName) {
+        return ResponseEntity.success(jobService.log(groupName, jobName, page, size));
+    }
 
 }

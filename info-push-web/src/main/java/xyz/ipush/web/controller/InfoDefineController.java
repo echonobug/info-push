@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import xyz.ipush.web.entity.ResponseEntity;
 import xyz.ipush.web.service.InfoDefineService;
+import xyz.ipush.web.util.SecurityContextUtil;
 
 import javax.annotation.Resource;
 
@@ -39,9 +40,7 @@ public class InfoDefineController {
                                @RequestParam(name = "size", defaultValue = "5") Integer size,
                                @RequestParam(name = "keyword", defaultValue = "") String keyword) {
         return ResponseEntity.success(
-                infoDefineService.page(new Page<>(page, size),
-                        infoDefineService.query().select("id", "title", "description", "image")
-                                .like("title", keyword).or().like("description", keyword).getWrapper())
+                infoDefineService.list(page, size, keyword, SecurityContextUtil.getUser().getId())
         );
     }
 

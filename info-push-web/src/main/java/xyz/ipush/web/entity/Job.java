@@ -1,13 +1,13 @@
 package xyz.ipush.web.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
-
-import lombok.Data;
 
 /**
  * <p>
@@ -25,19 +25,19 @@ public class Job implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
+     *
      */
     @TableField(value = "id")
     private String id;
 
     /**
-     * 
+     *
      */
     @TableField(value = "group_name")
     private String groupName;
 
     /**
-     * 
+     *
      */
     @TableField(value = "job_name")
     private String jobName;
@@ -49,14 +49,15 @@ public class Job implements Serializable {
     private Integer jobStatus;
 
     /**
-     * 
+     *
      */
     @TableField(value = "description")
     private String description;
 
     /**
-     * 
+     *
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField(value = "create_time")
     private Date createTime;
 

@@ -14,19 +14,26 @@ public enum ErrorCodeEnum {
     PASSWORD_NOT_MATCHED(10002, "用户名或密码错误！"),
     NOT_LOGIN(10003, "您当前未登录，请先登录！"),
     INVALID_TOKEN(10004, "登录已失效，请重新登录！"),
-    ACCOUNT_NOT_ENABLE(10005,"账号不可用，请先到邮箱激活您的账号！"),
+    ACCOUNT_NOT_ENABLE(10005, "账号不可用，请先到邮箱激活您的账号！"),
 
     /**
      * 注册相关异常
      */
     EMAIL_ALREADY_EXISTS(10201, "该邮箱已注册，请直接登录！"),
-    INVALID_ACTIVE_URL(10202,"激活失败！链接非法！"),
-    USERNAME_ALREADY_EXISTS(10203,"该用户名已被注册！"),
+    INVALID_ACTIVE_URL(10202, "激活失败！链接非法！"),
+    USERNAME_ALREADY_EXISTS(10203, "该用户名已被注册！"),
 
     /**
      * 权限相关
      */
     NOT_AUTHORIZED(10101, "没有权限！"),
+
+    /**
+     * 任务相关错误
+     */
+    UNSUPPORTED_TASK_TYPE(10301, "不支持的任务类型！"),
+    TASK_ONLINE_ERROR(10302, "任务上线失败！"),
+    TASK_OFFLINE_ERROR(10303, "任务下线失败！"),
 
     /**
      * 未知错误

@@ -1,9 +1,12 @@
 package xyz.ipush.web.controller;
 
 import io.swagger.annotations.ApiOperation;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import xyz.ipush.web.entity.ResponseEntity;
+import xyz.ipush.web.exception.IPushException;
 import xyz.ipush.web.service.TaskService;
+import xyz.ipush.web.vo.TaskKeyVO;
 
 import javax.annotation.Resource;
 
@@ -28,5 +31,27 @@ public class TaskController {
         return ResponseEntity.success(
                 taskService.list(page, size)
         );
+    }
+
+    @ApiOperation("上线任务")
+    @PostMapping("online")
+    public ResponseEntity online(@RequestBody @Validated TaskKeyVO taskKeyVO) {
+        try {
+            taskService.online(taskKeyVO);
+            return ResponseEntity.success("任务上线成功！");
+        } catch (IPushException e) {
+            return ResponseEntity.error(e);
+        }
+    }
+
+    @ApiOperation("下线任务")
+    @PostMapping("offline")
+    public ResponseEntity offline(@RequestBody @Validated TaskKeyVO taskKeyVO) {
+        try {
+            taskService.offline(taskKeyVO);
+            return ResponseEntity.success("任务下线成功！");
+        } catch (IPushException e) {
+            return ResponseEntity.error(e);
+        }
     }
 }

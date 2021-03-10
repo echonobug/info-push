@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2021/3/2
  */
 @SpringBootApplication(scanBasePackages = "xyz.ipush.*")
-public class Finder {
+public class  Finder {
     public static void main(String[] args) {
         SpringApplication.run(Finder.class, args);
     }

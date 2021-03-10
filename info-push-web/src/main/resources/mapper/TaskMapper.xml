@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="xyz.ipush.web.mapper.TaskMapper">
-    <select id="listFindTask" resultType="java.util.Map">
-
-
-    </select>
     <select id="listTask" resultType="java.util.Map">
         select id.id, 'find' type, id.title, id.update_cron cron, !isnull(qjd.JOB_NAME) online, count(j.id) cnt
         from info_define id

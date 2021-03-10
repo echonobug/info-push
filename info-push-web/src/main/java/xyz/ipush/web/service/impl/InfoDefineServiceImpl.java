@@ -2,6 +2,8 @@ package xyz.ipush.web.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 import xyz.ipush.common.contant.IPushConstant;
 import xyz.ipush.common.dto.EmailHtmlDTO;
@@ -9,13 +11,16 @@ import xyz.ipush.common.dto.InfoSpiderDTO;
 import xyz.ipush.common.pojo.IPushInfoDefineContent;
 import xyz.ipush.common.pojo.IPushSend;
 import xyz.ipush.message.IPushKafkaProducer;
+import xyz.ipush.web.dto.InfoDTO;
 import xyz.ipush.web.entity.*;
 import xyz.ipush.web.mapper.InfoDefineMapper;
+import xyz.ipush.web.mapper.InfoMapper;
 import xyz.ipush.web.scheduler.job.IPushJob;
 import xyz.ipush.web.service.*;
 
 import javax.annotation.Resource;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * <p>
@@ -38,6 +43,8 @@ public class InfoDefineServiceImpl extends ServiceImpl<InfoDefineMapper, InfoDef
     private UserService userService;
     @Resource
     private JobService jobService;
+    @Resource
+    private InfoMapper infoMapper;
 
 
     @Override
@@ -87,5 +94,12 @@ public class InfoDefineServiceImpl extends ServiceImpl<InfoDefineMapper, InfoDef
             job.setDescription("未找到id为" + id + "的订阅记录或对应的信息定义未找到！");
         }
         jobService.save(job);
+    }
+
+    @Override
+    public PageInfo<InfoDTO> list(Integer page, Integer size, String keyword, String userId) {
+        PageHelper.startPage(page, size);
+        List<InfoDTO> infos = infoMapper.listWithIfConcerned(keyword.length() > 0 ? "%" + keyword + "%" : null, userId);
+        return new PageInfo<>(infos);
     }
 }
