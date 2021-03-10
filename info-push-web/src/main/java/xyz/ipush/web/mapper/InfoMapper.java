@@ -5,6 +5,9 @@ import xyz.ipush.web.dto.InfoDTO;
 
 import java.util.List;
 
+/**
+ * @author jwei
+ */
 @Mapper
 public interface InfoMapper {
     /**
