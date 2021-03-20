@@ -20,31 +20,31 @@ import java.util.List;
 @Component
 @Slf4j
 public class IPushPageProcessor implements PageProcessor {
-    /**
-     * 抓取网站的相关配置，包括编码、抓取间隔、重试次数等
-     */
-    private final Site site = Site.me().setRetryTimes(3).setSleepTime(1000);
-
-    @Override
-    public void process(Page page) {
-        List<IPushParse> parseList = page.getRequest().getExtra(IPushConstant.REQUEST_PARSE_KEY);
-        for (IPushParse parse : parseList) {
-            List<IPushField> content = parse.getContent();
-            switch (parse.getParser()) {
-                case IPushParse.XSOUP:
-                    content.forEach(f -> page.putField(f.getFieldName(), page.getHtml().xpath(f.getSelector()).toString()));
-                    break;
-                case IPushParse.JSOUP:
-                    log.warn("暂不支持的HTML解析器:{}", parse.getParser());
-                    break;
-                default:
-                    log.warn("不支持的HTML解析器:{}", parse.getParser());
-            }
-        }
-    }
-
-    @Override
-    public Site getSite() {
-        return site;
-    }
+	/**
+	 * 抓取网站的相关配置，包括编码、抓取间隔、重试次数等
+	 */
+	private final Site site = Site.me().setRetryTimes(3).setSleepTime(1000);
+	
+	@Override
+	public void process(Page page) {
+		List<IPushParse> parseList = page.getRequest().getExtra(IPushConstant.REQUEST_PARSE_KEY);
+		for (IPushParse parse : parseList) {
+			List<IPushField> content = parse.getContent();
+			switch (parse.getParser()) {
+				case IPushParse.XPATH:
+					content.forEach(f -> page.putField(f.getFieldName(), page.getHtml().xpath(f.getSelector()).toString()));
+					break;
+				case IPushParse.JSONPATH:
+					content.forEach(f -> page.putField(f.getFieldName(), page.getJson().jsonPath(f.getSelector()).toString()));
+					break;
+				default:
+					log.warn("不支持的HTML解析器:{}", parse.getParser());
+			}
+		}
+	}
+	
+	@Override
+	public Site getSite() {
+		return site;
+	}
 }

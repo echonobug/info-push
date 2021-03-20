@@ -8,7 +8,6 @@
 		<result column="description" property="description" />
 		<result column="image" property="image" />
 		<result column="content" property="content" />
-		<result column="enable_update" property="enableUpdate" />
 		<result column="update_cron" property="updateCron" />
 		<result column="creator_id" property="creatorId" />
 		<result column="create_time" property="createTime" />
@@ -30,9 +29,6 @@
 			</if>
 			<if test="content != null">
 				content,
-			</if>
-			<if test="enableUpdate != null">
-				enable_update,
 			</if>
 			<if test="updateCron != null">
 				update_cron,
@@ -60,9 +56,6 @@
 			<if test="content != null">
 				#{content},
 			</if>
-			<if test="enableUpdate != null">
-				#{enableUpdate},
-			</if>
 			<if test="updateCron != null">
 				#{updateCron},
 			</if>
@@ -74,4 +67,27 @@
 			</if>
 		</trim>
 	</insert>
+    <select id="list" resultMap="BaseResultMap">
+        select * from info_define
+        <where>
+            <if test="id != null">
+                id like concat('%',#{id},'%')
+            </if>
+            <if test="title != null">
+                and title like concat('%',#{title},'%')
+            </if>
+            <if test="description != null">
+                and description like concat('%',#{description},'%')
+            </if>
+            <if test="content != null">
+                and content like concat('%',#{content},'%')
+            </if>
+            <if test="updateCron != null">
+                and updateCron like concat('%',#{updateCron},'%')
+            </if>
+            <if test="creatorId != null">
+                and creatorId like concat('%',#{creatorId},'%')
+            </if>
+        </where>
+    </select>
 </mapper>

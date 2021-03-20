@@ -17,5 +17,5 @@ public interface InfoMapper {
      * @param userId  用户id
      * @return 信息定义数据
      */
-    List<InfoDTO> listWithIfConcerned(String keyword, String userId);
+    List<InfoDTO> listWithSubInfo(String keyword, String userId);
 }

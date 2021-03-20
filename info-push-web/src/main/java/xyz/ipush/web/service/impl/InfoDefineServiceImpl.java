@@ -17,6 +17,7 @@ import xyz.ipush.web.mapper.InfoDefineMapper;
 import xyz.ipush.web.mapper.InfoMapper;
 import xyz.ipush.web.scheduler.job.IPushJob;
 import xyz.ipush.web.service.*;
+import xyz.ipush.web.vo.PageVO;
 
 import javax.annotation.Resource;
 import java.util.Collections;
@@ -45,6 +46,8 @@ public class InfoDefineServiceImpl extends ServiceImpl<InfoDefineMapper, InfoDef
     private JobService jobService;
     @Resource
     private InfoMapper infoMapper;
+    @Resource
+    private InfoDefineMapper infoDefineMapper;
 
 
     @Override
@@ -97,9 +100,17 @@ public class InfoDefineServiceImpl extends ServiceImpl<InfoDefineMapper, InfoDef
     }
 
     @Override
-    public PageInfo<InfoDTO> list(Integer page, Integer size, String keyword, String userId) {
+    public PageInfo<InfoDTO> listWithSubInfo(Integer page, Integer size, String keyword, String userId) {
         PageHelper.startPage(page, size);
-        List<InfoDTO> infos = infoMapper.listWithIfConcerned(keyword.length() > 0 ? "%" + keyword + "%" : null, userId);
+        List<InfoDTO> infos = infoMapper.listWithSubInfo(keyword.length() > 0 ? keyword : null, userId);
         return new PageInfo<>(infos);
     }
+
+    @Override
+    public PageInfo<InfoDefine> list(InfoDefine define, Integer page, Integer size) {
+        PageHelper.startPage(page, size);
+        List<InfoDefine> infos = infoDefineMapper.list(define);
+        return new PageInfo<>(infos);
+    }
+
 }

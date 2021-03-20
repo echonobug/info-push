@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
 import xyz.ipush.web.dto.InfoDTO;
 import xyz.ipush.web.entity.InfoDefine;
+import xyz.ipush.web.vo.PageVO;
 
 /**
  * <p>
@@ -38,5 +39,8 @@ public interface InfoDefineService extends IService<InfoDefine> {
      * @param userId  用户ID
      * @return 分页数据
      */
-    PageInfo<InfoDTO> list(Integer page, Integer size, String keyword, String userId);
+    PageInfo<InfoDTO> listWithSubInfo(Integer page, Integer size, String keyword, String userId);
+
+    PageInfo<InfoDefine> list(InfoDefine define, Integer page, Integer size);
+
 }

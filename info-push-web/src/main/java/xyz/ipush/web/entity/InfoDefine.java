@@ -7,6 +7,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -15,7 +16,7 @@ import lombok.Data;
  * </p>
  *
  * @author jwei
- * @date 2021/03/05
+ * @date 2021/03/16
  */
 @Data
 @TableName("info_define")
@@ -25,7 +26,7 @@ public class InfoDefine implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
+     *
      */
     @TableField(value = "id")
     private String id;
@@ -37,7 +38,7 @@ public class InfoDefine implements Serializable {
     private String title;
 
     /**
-     * 
+     *
      */
     @TableField(value = "description")
     private String description;
@@ -49,32 +50,27 @@ public class InfoDefine implements Serializable {
     private String image;
 
     /**
-     * 
+     *
      */
     @TableField(value = "content")
     private String content;
 
     /**
-     * 
-     */
-    @TableField(value = "enable_update")
-    private Integer enableUpdate;
-
-    /**
-     * 
+     *
      */
     @TableField(value = "update_cron")
     private String updateCron;
 
     /**
-     * 
+     *
      */
     @TableField(value = "creator_id")
     private String creatorId;
 
     /**
-     * 
+     *
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField(value = "create_time")
     private Date createTime;
 

@@ -12,8 +12,8 @@ import java.util.List;
  */
 @Data
 public class IPushParse {
-    public static final String XSOUP = "xsoup";
-    public static final String JSOUP = "jsoup";
+    public static final String XPATH = "XPath";
+    public static final String JSONPATH = "JsonPath";
     /**
      * 解析器
      */

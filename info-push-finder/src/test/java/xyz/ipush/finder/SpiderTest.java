@@ -21,49 +21,45 @@ public class SpiderTest {
     private IPushSpider ipushSpider;
 
     private final String content = "{\n" +
-            "    \"find\": [\n" +
-            "      {\n" +
-            "        \"render\": true,\n" +
-            "        \"request\": {\n" +
-            "          \"url\": \"http://www.weather.com.cn/weather/101270101.shtml\",\n" +
-            "          \"method\": \"get\",\n" +
-            "          \"header\": \"\",\n" +
-            "          \"cookies\": \"\"\n" +
-            "        },\n" +
-            "        \"parse\": [\n" +
-            "          {\n" +
-            "            \"parser\": \"jsoup\",\n" +
-            "            \"content\": [\n" +
-            "              {\n" +
-            "                \"fieldName\": \" \",\n" +
-            "                \"selector\": \"\",\n" +
-            "                \"extra\": {}\n" +
-            "              }\n" +
-            "            ]\n" +
-            "          },\n" +
-            "          {\n" +
-            "            \"parser\": \"xsoup\",\n" +
-            "            \"content\": [\n" +
-            "              {\n" +
-            "                \"field_name\": \"wea\",\n" +
-            "                \"selector\": \"//*[@id=\\\"7d\\\"]/ul/li[1]/p[1]/text()\",\n" +
-            "                \"extra\": {}\n" +
-            "              }\n" +
-            "              {\n" +
-            "                \"field_name\": \"tem\",\n" +
-            "                \"selector\": \"//*[@id=\\\"7d\\\"]/ul/li[1]/p[2]/i/text()\",\n" +
-            "                \"extra\": {}\n" +
-            "              }\n" +
-            "            ]\n" +
-            "          }\n" +
-            "        ]\n" +
+            "  \"find\": [\n" +
+            "    {\n" +
+            "      \"parse\": [\n" +
+            "        {\n" +
+            "          \"parser\": \"JsonPath\",\n" +
+            "          \"content\": [\n" +
+            "            {\n" +
+            "              \"extra\": {},\n" +
+            "              \"selector\": \"$.data[0].currentRank\",\n" +
+            "              \"fieldName\": \"rank\"\n" +
+            "            },\n" +
+            "            {\n" +
+            "              \"extra\": {},\n" +
+            "              \"selector\": \"$.data[0].articleTitle\",\n" +
+            "              \"fieldName\": \"title\"\n" +
+            "            },\n" +
+            "            {\n" +
+            "              \"extra\": {},\n" +
+            "              \"selector\": \"$.data[0].articleDetailUrl\",\n" +
+            "              \"fieldName\": \"url\"\n" +
+            "            }\n" +
+            "          ]\n" +
+            "        }\n" +
+            "      ],\n" +
+            "      \"render\": false,\n" +
+            "      \"request\": {\n" +
+            "        \"url\": \"https://blog.csdn.net/phoenix/web/blog/hotRank?page=0&pageSize=25&child_channel=\",\n" +
+            "        \"header\": \"\",\n" +
+            "        \"method\": \"get\",\n" +
+            "        \"cookies\": \"\"\n" +
             "      }\n" +
-            "    ],\n" +
-            "    \"send\": {\n" +
-            "      \"type\": \"email_html\",\n" +
-            "      \"content\": \"html\"\n" +
             "    }\n" +
-            "  }";
+            "  ],\n" +
+            "  \"send\": {\n" +
+            "    \"type\": \"email_html\",\n" +
+            "    \"content\": \"hello\",\n" +
+            "    \"subject\": \"csdn综合榜1\"\n" +
+            "  }\n" +
+            "}";
 
     @Test
     void run() {

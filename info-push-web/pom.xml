@@ -109,7 +109,7 @@
                     <!--mapper.xml的输出目录(默认与outputDir一致)-->
                     <xmlOutputDir>H:\info-push\info-push-web\src\main\resources</xmlOutputDir>
                     <!-- 是否覆盖同名文件(默认false) -->
-                    <fileOverride>true</fileOverride>
+                    <fileOverride>false</fileOverride>
                     <!-- mapper.xml 中添加二级缓存配置(默认true) -->
                     <enableCache>false</enableCache>
                     <!-- 开发者名称 -->
@@ -144,10 +144,10 @@
                         <include>
                             <!--                            <property>user</property>-->
                             <!--                            <property>access_log</property>-->
-                            <!--                            <property>info_define</property>-->
+                                                        <property>info_define</property>
                             <!--                            <property>info_data</property>-->
 <!--                            <property>subscription</property>-->
-                            <property>job</property>
+<!--                            <property>job</property>-->
                             <!--<property>table1</property>-->
                         </include>
                         <!-- 要排除的表 -->
